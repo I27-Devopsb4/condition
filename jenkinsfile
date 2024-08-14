@@ -4,7 +4,7 @@ pipeline {
         booleanParam (name: 'Is SRE approved ?', defaultValue: true, description: 'Is Approvel taken from SRE')
         choice(choices: 'Regular\nHotfix', description: 'What release is this', name: 'RELEASE')
         password(name: 'mypassword', defaultValue: '', description: 'Enter the password')
-        credentials (name: 'mycreds', description: 'MyDockerCreds', required: true)
+        credentials(name: 'mycreds', description: 'MyDockerCreds', required: true)
     }
     agent any
     stages {
