@@ -1,12 +1,23 @@
 pipeline {
-    agent any 
     parameters {
-        string(name: 'PERSON', defaultValue: 'divya', description: 'Enter Your name')
+        string (name: 'CHANGE_TICKET', defaultValue: 'CH12345', description: 'Please Enter your change ticket')
+        booleanParam (name: 'Is SRE approved ?', defaultValue: true, description: 'Is Approvel taken from SRE')
+        choice(choices: 'Regular\nHotfix', description: 'What release is this', name: 'RELEASE')
+        password(name: 'mypassword', defaultValue: '', description: 'Enter the password')
     }
+    agent any
     stages {
-        stage ('ParameterExample') {
+        stage ('DeployToDev') {
             steps {
-                echo "Welcome ${params.PERSON}"
+                echo "Deployed to dev succesfully"
+            }
+        }
+        stage ('DeployToProd') {
+            steps {
+                echo "your change ticket ${params.CHANGE_TICKET} is validate"
+                echo "Deploy to prod"
+                echo "This is a ${params.RELEASE}"
+                echo "the password is ${params.mypassword}"
             }
         }
     }
