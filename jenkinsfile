@@ -1,50 +1,12 @@
 pipeline {
-    agent any
+    agent any 
+    parameters {
+        string(name: 'PERSON', defaultValue: 'divya', description: 'Enter Your name')
+    }
     stages {
-        stage ('Build') {
+        stage ('ParameterExample') {
             steps {
-                echo "****Building the application******"
-            }
-        }
-        stage ('Sonar') {
-            steps {
-                echo "****Building the application******"
-            }
-        }
-        stage ('DockerBuild') {
-            steps {
-                echo "****Building the container application******"
-            }
-        }
-        stage ('DockerPush') {
-            steps {
-                echo "****Pushing the image******"
-            }
-        }
-        stage ('DeployToDev')  {
-            steps {
-                echo "****Deploying the application to Dev env******"
-            }
-        }
-        stage ('DeployToTest'){
-            steps {
-                echo "****Deploying the application to Test env******"
-            }
-        }
-        stage ('DeployToStage')  {
-            when {
-                branch 'release/*'
-            }
-            steps {
-                echo "****Deploying the application to Stage env******"
-            }
-        }
-        stage ('DeployToProd') {
-            when {
-                tag pattern: "v\\d{1,2}\\.\\d{1,2}\\.\\d{1,2}", comparator: "REGEXP"
-            }
-            steps {
-                echo "****Building the application******"
+                echo "Welcome ${params.PERSON}"
             }
         }
     }
